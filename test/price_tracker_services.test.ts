@@ -12,10 +12,10 @@ test('SQS Queue Created', () => {
     }));
 });
 
-test('SNS Topic Created', () => {
-  const app = new cdk.App();
-  // WHEN
-  const stack = new PriceTrackerServices.PriceTrackerServicesStack(app, 'MyTestStack');
-  // THEN
-  expectCDK(stack).to(haveResource("AWS::SNS::Topic"));
-});
+// test('SNS Topic Created', () => {
+//   const app = new cdk.App();
+//   // WHEN
+//   const stack = new PriceTrackerServices.PriceTrackerServicesStack(app, 'MyTestStack');
+//   // THEN
+//   expectCDK(stack).to(haveResource("AWS::SNS::Topic"));
+// });
