@@ -3,10 +3,24 @@ const {DynamoDB, Lambda} = require('aws-sdk');
 
 exports.handler = async function(event) {
   console.log("request:", JSON.stringify(event, undefined, 2));
+  var product_url = event.pathParameters.product_url;
+
+  const dynamo = new DynamoDB();
+
+  var params = {
+    TableName: process.env.TABLE,
+    KeyConditionExpress: 'product_url = :url',
+    ExpressionAttributeValues: {
+      ':url': {S: product_url}
+    }
+  }
+
+  data = await dynamo.query(params);
+
   return {
     statusCode: 200,
     headers: { "Content-Type": "text/plain" },
-    body: `Getting the current price of the product!, CDK! You've hit ${event.path}\n`
+    body: `Getting the current price of the product ${product_url}\n Query results: ${data.Items}`
   };
 
   // Query DB
