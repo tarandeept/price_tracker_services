@@ -13,16 +13,16 @@ export class PriceTrackerServicesStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Defines an AWS Lambda Resource
-    const hello = new lambda.Function(this, 'HelloHandler', {
-      runtime: lambda.Runtime.NODEJS_14_X,
-      code: lambda.Code.fromAsset('lambda'),
-      handler: 'hello.handler'
-    });
+    // // Defines an AWS Lambda Resource
+    // const hello = new lambda.Function(this, 'HelloHandler', {
+    //   runtime: lambda.Runtime.NODEJS_14_X,
+    //   code: lambda.Code.fromAsset('lambda'),
+    //   handler: 'hello.handler'
+    // });
 
-    const helloWithCounter = new HitCounter(this , 'HelloHitCounter', {
-      downstream: hello
-    });
+    // const helloWithCounter = new HitCounter(this , 'HelloHitCounter', {
+    //   downstream: hello
+    // });
 
     const productService = new ProductService(this, 'ProductService', {});
 

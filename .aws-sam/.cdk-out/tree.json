@@ -16,499 +16,6 @@
         "id": "PriceTrackerServicesStack",
         "path": "PriceTrackerServicesStack",
         "children": {
-          "HelloHandler": {
-            "id": "HelloHandler",
-            "path": "PriceTrackerServicesStack/HelloHandler",
-            "children": {
-              "ServiceRole": {
-                "id": "ServiceRole",
-                "path": "PriceTrackerServicesStack/HelloHandler/ServiceRole",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "PriceTrackerServicesStack/HelloHandler/ServiceRole/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                      "aws:cdk:cloudformation:props": {
-                        "assumeRolePolicyDocument": {
-                          "Statement": [
-                            {
-                              "Action": "sts:AssumeRole",
-                              "Effect": "Allow",
-                              "Principal": {
-                                "Service": "lambda.amazonaws.com"
-                              }
-                            }
-                          ],
-                          "Version": "2012-10-17"
-                        },
-                        "managedPolicyArns": [
-                          {
-                            "Fn::Join": [
-                              "",
-                              [
-                                "arn:",
-                                {
-                                  "Ref": "AWS::Partition"
-                                },
-                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-                              ]
-                            ]
-                          }
-                        ]
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-iam.CfnRole",
-                      "version": "1.121.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-iam.Role",
-                  "version": "1.121.0"
-                }
-              },
-              "Code": {
-                "id": "Code",
-                "path": "PriceTrackerServicesStack/HelloHandler/Code",
-                "children": {
-                  "Stage": {
-                    "id": "Stage",
-                    "path": "PriceTrackerServicesStack/HelloHandler/Code/Stage",
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/core.AssetStaging",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "AssetBucket": {
-                    "id": "AssetBucket",
-                    "path": "PriceTrackerServicesStack/HelloHandler/Code/AssetBucket",
-                    "children": {
-                      "Notifications": {
-                        "id": "Notifications",
-                        "path": "PriceTrackerServicesStack/HelloHandler/Code/AssetBucket/Notifications",
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/core.Construct",
-                          "version": "1.121.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-s3.BucketBase",
-                      "version": "1.121.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-s3-assets.Asset",
-                  "version": "1.121.0"
-                }
-              },
-              "Resource": {
-                "id": "Resource",
-                "path": "PriceTrackerServicesStack/HelloHandler/Resource",
-                "attributes": {
-                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                  "aws:cdk:cloudformation:props": {
-                    "code": {
-                      "s3Bucket": {
-                        "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3Bucket426CAFBD"
-                      },
-                      "s3Key": {
-                        "Fn::Join": [
-                          "",
-                          [
-                            {
-                              "Fn::Select": [
-                                0,
-                                {
-                                  "Fn::Split": [
-                                    "||",
-                                    {
-                                      "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "Fn::Select": [
-                                1,
-                                {
-                                  "Fn::Split": [
-                                    "||",
-                                    {
-                                      "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        ]
-                      }
-                    },
-                    "role": {
-                      "Fn::GetAtt": [
-                        "HelloHandlerServiceRole11EF7C63",
-                        "Arn"
-                      ]
-                    },
-                    "handler": "hello.handler",
-                    "runtime": "nodejs14.x"
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-lambda.CfnFunction",
-                  "version": "1.121.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "@aws-cdk/aws-lambda.Function",
-              "version": "1.121.0"
-            }
-          },
-          "AssetParameters": {
-            "id": "AssetParameters",
-            "path": "PriceTrackerServicesStack/AssetParameters",
-            "children": {
-              "898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d": {
-                "id": "898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d",
-                "path": "PriceTrackerServicesStack/AssetParameters/898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d",
-                "children": {
-                  "S3Bucket": {
-                    "id": "S3Bucket",
-                    "path": "PriceTrackerServicesStack/AssetParameters/898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d/S3Bucket",
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/core.CfnParameter",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "S3VersionKey": {
-                    "id": "S3VersionKey",
-                    "path": "PriceTrackerServicesStack/AssetParameters/898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d/S3VersionKey",
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/core.CfnParameter",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "ArtifactHash": {
-                    "id": "ArtifactHash",
-                    "path": "PriceTrackerServicesStack/AssetParameters/898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28d/ArtifactHash",
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/core.CfnParameter",
-                      "version": "1.121.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/core.Construct",
-                  "version": "1.121.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "@aws-cdk/core.Construct",
-              "version": "1.121.0"
-            }
-          },
-          "HelloHitCounter": {
-            "id": "HelloHitCounter",
-            "path": "PriceTrackerServicesStack/HelloHitCounter",
-            "children": {
-              "Hits": {
-                "id": "Hits",
-                "path": "PriceTrackerServicesStack/HelloHitCounter/Hits",
-                "children": {
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "PriceTrackerServicesStack/HelloHitCounter/Hits/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::DynamoDB::Table",
-                      "aws:cdk:cloudformation:props": {
-                        "keySchema": [
-                          {
-                            "attributeName": "path",
-                            "keyType": "HASH"
-                          }
-                        ],
-                        "attributeDefinitions": [
-                          {
-                            "attributeName": "path",
-                            "attributeType": "S"
-                          }
-                        ],
-                        "provisionedThroughput": {
-                          "readCapacityUnits": 5,
-                          "writeCapacityUnits": 5
-                        },
-                        "sseSpecification": {
-                          "sseEnabled": true
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-dynamodb.CfnTable",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "ScalingRole": {
-                    "id": "ScalingRole",
-                    "path": "PriceTrackerServicesStack/HelloHitCounter/Hits/ScalingRole",
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/core.Resource",
-                      "version": "1.121.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-dynamodb.Table",
-                  "version": "1.121.0"
-                }
-              },
-              "HitCounterHandler": {
-                "id": "HitCounterHandler",
-                "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler",
-                "children": {
-                  "ServiceRole": {
-                    "id": "ServiceRole",
-                    "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/ServiceRole",
-                    "children": {
-                      "Resource": {
-                        "id": "Resource",
-                        "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/ServiceRole/Resource",
-                        "attributes": {
-                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
-                          "aws:cdk:cloudformation:props": {
-                            "assumeRolePolicyDocument": {
-                              "Statement": [
-                                {
-                                  "Action": "sts:AssumeRole",
-                                  "Effect": "Allow",
-                                  "Principal": {
-                                    "Service": "lambda.amazonaws.com"
-                                  }
-                                }
-                              ],
-                              "Version": "2012-10-17"
-                            },
-                            "managedPolicyArns": [
-                              {
-                                "Fn::Join": [
-                                  "",
-                                  [
-                                    "arn:",
-                                    {
-                                      "Ref": "AWS::Partition"
-                                    },
-                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-                                  ]
-                                ]
-                              }
-                            ]
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/aws-iam.CfnRole",
-                          "version": "1.121.0"
-                        }
-                      },
-                      "DefaultPolicy": {
-                        "id": "DefaultPolicy",
-                        "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/ServiceRole/DefaultPolicy",
-                        "children": {
-                          "Resource": {
-                            "id": "Resource",
-                            "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/ServiceRole/DefaultPolicy/Resource",
-                            "attributes": {
-                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
-                              "aws:cdk:cloudformation:props": {
-                                "policyDocument": {
-                                  "Statement": [
-                                    {
-                                      "Action": [
-                                        "dynamodb:BatchGetItem",
-                                        "dynamodb:GetRecords",
-                                        "dynamodb:GetShardIterator",
-                                        "dynamodb:Query",
-                                        "dynamodb:GetItem",
-                                        "dynamodb:Scan",
-                                        "dynamodb:ConditionCheckItem",
-                                        "dynamodb:BatchWriteItem",
-                                        "dynamodb:PutItem",
-                                        "dynamodb:UpdateItem",
-                                        "dynamodb:DeleteItem"
-                                      ],
-                                      "Effect": "Allow",
-                                      "Resource": [
-                                        {
-                                          "Fn::GetAtt": [
-                                            "HelloHitCounterHits7AAEBF80",
-                                            "Arn"
-                                          ]
-                                        },
-                                        {
-                                          "Ref": "AWS::NoValue"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "Action": "lambda:InvokeFunction",
-                                      "Effect": "Allow",
-                                      "Resource": {
-                                        "Fn::GetAtt": [
-                                          "HelloHandler2E4FBA4D",
-                                          "Arn"
-                                        ]
-                                      }
-                                    }
-                                  ],
-                                  "Version": "2012-10-17"
-                                },
-                                "policyName": "HelloHitCounterHitCounterHandlerServiceRoleDefaultPolicy1487A60A",
-                                "roles": [
-                                  {
-                                    "Ref": "HelloHitCounterHitCounterHandlerServiceRoleD45002B8"
-                                  }
-                                ]
-                              }
-                            },
-                            "constructInfo": {
-                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
-                              "version": "1.121.0"
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/aws-iam.Policy",
-                          "version": "1.121.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-iam.Role",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "Code": {
-                    "id": "Code",
-                    "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/Code",
-                    "children": {
-                      "Stage": {
-                        "id": "Stage",
-                        "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/Code/Stage",
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/core.AssetStaging",
-                          "version": "1.121.0"
-                        }
-                      },
-                      "AssetBucket": {
-                        "id": "AssetBucket",
-                        "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/Code/AssetBucket",
-                        "children": {
-                          "Notifications": {
-                            "id": "Notifications",
-                            "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/Code/AssetBucket/Notifications",
-                            "constructInfo": {
-                              "fqn": "@aws-cdk/core.Construct",
-                              "version": "1.121.0"
-                            }
-                          }
-                        },
-                        "constructInfo": {
-                          "fqn": "@aws-cdk/aws-s3.BucketBase",
-                          "version": "1.121.0"
-                        }
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-s3-assets.Asset",
-                      "version": "1.121.0"
-                    }
-                  },
-                  "Resource": {
-                    "id": "Resource",
-                    "path": "PriceTrackerServicesStack/HelloHitCounter/HitCounterHandler/Resource",
-                    "attributes": {
-                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
-                      "aws:cdk:cloudformation:props": {
-                        "code": {
-                          "s3Bucket": {
-                            "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3Bucket426CAFBD"
-                          },
-                          "s3Key": {
-                            "Fn::Join": [
-                              "",
-                              [
-                                {
-                                  "Fn::Select": [
-                                    0,
-                                    {
-                                      "Fn::Split": [
-                                        "||",
-                                        {
-                                          "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "Fn::Select": [
-                                    1,
-                                    {
-                                      "Fn::Split": [
-                                        "||",
-                                        {
-                                          "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            ]
-                          }
-                        },
-                        "role": {
-                          "Fn::GetAtt": [
-                            "HelloHitCounterHitCounterHandlerServiceRoleD45002B8",
-                            "Arn"
-                          ]
-                        },
-                        "environment": {
-                          "variables": {
-                            "DOWNSTREAM_FUNCTION_NAME": {
-                              "Ref": "HelloHandler2E4FBA4D"
-                            },
-                            "HITS_TABLE_NAME": {
-                              "Ref": "HelloHitCounterHits7AAEBF80"
-                            }
-                          }
-                        },
-                        "handler": "hitcounter.handler",
-                        "runtime": "nodejs14.x"
-                      }
-                    },
-                    "constructInfo": {
-                      "fqn": "@aws-cdk/aws-lambda.CfnFunction",
-                      "version": "1.121.0"
-                    }
-                  }
-                },
-                "constructInfo": {
-                  "fqn": "@aws-cdk/aws-lambda.Function",
-                  "version": "1.121.0"
-                }
-              }
-            },
-            "constructInfo": {
-              "fqn": "@aws-cdk/core.Construct",
-              "version": "1.121.0"
-            }
-          },
           "ProductService": {
             "id": "ProductService",
             "path": "PriceTrackerServicesStack/ProductService",
@@ -718,7 +225,7 @@
                       "aws:cdk:cloudformation:props": {
                         "code": {
                           "s3Bucket": {
-                            "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3Bucket426CAFBD"
+                            "Ref": "AssetParameters47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873S3Bucket2A52D17B"
                           },
                           "s3Key": {
                             "Fn::Join": [
@@ -731,7 +238,7 @@
                                       "Fn::Split": [
                                         "||",
                                         {
-                                          "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
+                                          "Ref": "AssetParameters47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873S3VersionKey8379065A"
                                         }
                                       ]
                                     }
@@ -744,7 +251,7 @@
                                       "Fn::Split": [
                                         "||",
                                         {
-                                          "Ref": "AssetParameters898d17406e600153cb8dad94467e75bc4ccba99fc1ea88c6ad57c0c66c94c28dS3VersionKey076B44C7"
+                                          "Ref": "AssetParameters47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873S3VersionKey8379065A"
                                         }
                                       ]
                                     }
@@ -1161,6 +668,50 @@
                 },
                 "constructInfo": {
                   "fqn": "@aws-cdk/aws-apigateway.LambdaRestApi",
+                  "version": "1.121.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.121.0"
+            }
+          },
+          "AssetParameters": {
+            "id": "AssetParameters",
+            "path": "PriceTrackerServicesStack/AssetParameters",
+            "children": {
+              "47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873": {
+                "id": "47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873",
+                "path": "PriceTrackerServicesStack/AssetParameters/47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873",
+                "children": {
+                  "S3Bucket": {
+                    "id": "S3Bucket",
+                    "path": "PriceTrackerServicesStack/AssetParameters/47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873/S3Bucket",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.121.0"
+                    }
+                  },
+                  "S3VersionKey": {
+                    "id": "S3VersionKey",
+                    "path": "PriceTrackerServicesStack/AssetParameters/47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873/S3VersionKey",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.121.0"
+                    }
+                  },
+                  "ArtifactHash": {
+                    "id": "ArtifactHash",
+                    "path": "PriceTrackerServicesStack/AssetParameters/47668733824128188ab8182c08c7acff605a8fde0204ef01605003be5f61d873/ArtifactHash",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.121.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
                   "version": "1.121.0"
                 }
               }
