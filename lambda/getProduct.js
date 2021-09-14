@@ -8,14 +8,15 @@ exports.handler = async function(event) {
   const dynamo = new DynamoDB();
 
   var params = {
-    TableName: process.env.TABLE,
-    KeyConditionExpress: 'product_url = :url',
+    TableName: process.env.TABLE_NAME,
+    KeyConditionExpression: 'product_url = :url',
     ExpressionAttributeValues: {
       ':url': {S: product_url}
     }
   }
 
-  data = await dynamo.query(params);
+  data = await dynamo.query(params).promise();
+  console.log("DATA: ", data.Items);
 
   return {
     statusCode: 200,

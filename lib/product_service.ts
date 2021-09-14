@@ -15,22 +15,16 @@ export class ProductService extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: ProductServiceProps) {
     super(scope, id);
 
-    const getProductHandler = new lambda.Function(this, 'getProductHandler', {
-      runtime: lambda.Runtime.NODEJS_14_X,
-      code: lambda.Code.fromAsset('lambda'),
-      handler: 'getProduct.handler'
-    });
-
-    const productsTable = new dynamodb.Table(this, 'products', {
+    const productsTable = new dynamodb.Table(this, 'Products', {
       partitionKey: { name: 'product_url', type: dynamodb.AttributeType.STRING }
     });
 
-    const handler = new lambda.Function(this, 'HitCounterHandler', {
+    const handler = new lambda.Function(this, 'GetProductHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
       handler: 'getProduct.handler',
       environment: {
-        TABLE: productsTable.tableName
+        TABLE_NAME: productsTable.tableName
       }
     });
 
@@ -45,7 +39,7 @@ export class ProductService extends cdk.Construct {
 
     const products = api.root.addResource('products');
     const product = products.addResource('{product_url}');
-    const getProductIntegration = new apigw.LambdaIntegration(getProductHandler);
+    const getProductIntegration = new apigw.LambdaIntegration(handler);
     product.addMethod('GET', getProductIntegration);  // GET /products/{product_url}
   }
 }
