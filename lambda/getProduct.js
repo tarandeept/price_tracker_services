@@ -1,12 +1,20 @@
 const {DynamoDB, Lambda} = require('aws-sdk');
 
+const build_response = (status, body) => {
+  return {
+    statusCode: status,
+    headers: { "Content-Type": "application/json" },
+    body: body
+  }
+}
 
 exports.handler = async function(event) {
-  console.log("request:", JSON.stringify(event, undefined, 2));
-  var product_url = event.pathParameters.product_url;
-
+  // console.log("request:", JSON.stringify(event, undefined, 2));
+  // console.log("EVENT PATH: ", event.pathParameters);
+  const product_url = event.pathParameters.product_url;
   const dynamo = new DynamoDB();
 
+  // Query DB
   var params = {
     TableName: process.env.TABLE_NAME,
     KeyConditionExpression: 'product_url = :url',
@@ -16,7 +24,11 @@ exports.handler = async function(event) {
   }
 
   data = await dynamo.query(params).promise();
-  console.log("DATA: ", data.Items);
+
+  // If product is there and price is present, return the product record
+  if (data.Items.length === 1 && data.Items[0].price > 0) {
+    return build_response(200, data);
+  }
 
   return {
     statusCode: 200,
@@ -24,8 +36,7 @@ exports.handler = async function(event) {
     body: `Getting the current price of the product ${product_url}\n Query results: ${data.Items}`
   };
 
-  // Query DB
-  // If product is there and price is present, return the product record
+
 
   // Else, crawl the page and extract the price
   // Persist price into table

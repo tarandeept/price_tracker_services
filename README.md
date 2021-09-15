@@ -15,5 +15,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
  * `cdk synth`       emits the synthesized CloudFormation template
 
 Running local test using SAM CLI
-
+Invoking a lambda
 sam-beta-cdk local invoke -e ./sam/event.json -n ./sam/env.json PriceTrackerServicesStack/GetProductHandler
+
+Starting an api gateway local server
+sam-beta-cdk local start-api -n ./sam/env.json
