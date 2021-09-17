@@ -6,12 +6,6 @@ import * as apigw from '@aws-cdk/aws-apigateway';
 export interface ProductServiceProps {}
 
 export class ProductService extends cdk.Construct {
-  // Allows accessing the counter function
-  public readonly handler: lambda.Function;
-
-  // The hit counter table
-  public readonly table: dynamodb.Table;
-
   constructor(scope: cdk.Construct, id: string, props: ProductServiceProps) {
     super(scope, id);
 
@@ -19,17 +13,27 @@ export class ProductService extends cdk.Construct {
       partitionKey: { name: 'product_url', type: dynamodb.AttributeType.STRING }
     });
 
+    const scraperHandler = new lambda.Function(this, 'ScraperHandler', {
+      runtime: lambda.Runtime.NODEJS_14_X,
+      code: lambda.Code.fromAsset('lambda'),
+      handler: 'scraper.handler'
+    });
+
     const handler = new lambda.Function(this, 'GetProductHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
       handler: 'getProduct.handler',
       environment: {
-        TABLE_NAME: productsTable.tableName
+        TABLE_NAME: productsTable.tableName,
+        SCRAPER_HANDLER: scraperHandler.functionName
       }
     });
 
     // grant the lambda role read/write permissions to our table
     productsTable.grantReadWriteData(handler);
+
+    // grant the handler permission to invoke the scraper lambda
+    scraperHandler.grantInvoke(handler);
 
     // Defines an API Gateway REST API resource backed by our Lambda handler
     const api = new apigw.LambdaRestApi(this, 'RestAPI', {

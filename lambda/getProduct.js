@@ -13,6 +13,7 @@ exports.handler = async function(event) {
   // console.log("EVENT PATH: ", event.pathParameters);
   const product_url = event.pathParameters.product_url;
   const dynamo = new DynamoDB();
+  const lambda = new Lambda();
 
   // Query DB
   var params = {
@@ -26,17 +27,18 @@ exports.handler = async function(event) {
   data = await dynamo.query(params).promise();
 
   // If product is there and price is present, return the product record
-  if (data.Items.length === 1 && data.Items[0].price > 0) {
+  if (data.Items.length === 1 && data.Items[0].price.N > 0) {
     return build_response(200, data);
   }
 
-  return {
-    statusCode: 200,
-    headers: { "Content-Type": "text/plain" },
-    body: `Getting the current price of the product ${product_url}\n Query results: ${data.Items}`
-  };
+  // Else Invoke Lambda to scrape product_url
+  const resp = await lambda.invoke({
+    FunctionName: process.env.SCRAPER_HANDLER,
+    Payload: JSON.stringify( {'body': 'hello world'} )
+  }).promise();
 
-
+  // return response
+  return JSON.parse(resp.Payload);
 
   // Else, crawl the page and extract the price
   // Persist price into table
