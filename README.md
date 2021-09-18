@@ -20,3 +20,6 @@ sam-beta-cdk local invoke -e ./sam/event.json -n ./sam/env.json PriceTrackerServ
 
 Starting an api gateway local server
 sam-beta-cdk local start-api -n ./sam/env.json
+
+Invoking the scraper lambda
+sam-beta-cdk local invoke -e ./sam/event2.json PriceTrackerServicesStack/ScraperHandler
