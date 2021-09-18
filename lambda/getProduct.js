@@ -24,7 +24,7 @@ exports.handler = async function(event) {
     }
   }
 
-  data = await dynamo.query(params).promise();
+  const data = await dynamo.query(params).promise();
 
   // If product is there and price is present, return the product record
   if (data.Items.length === 1 && data.Items[0].price.N > 0) {
@@ -34,8 +34,11 @@ exports.handler = async function(event) {
   // Else Invoke Lambda to scrape product_url
   const resp = await lambda.invoke({
     FunctionName: process.env.SCRAPER_HANDLER,
-    Payload: JSON.stringify( {'body': 'hello world'} )
+    Payload: JSON.stringify({'product_url': product_url}),
+    LogType: 'Tail'
   }).promise();
+
+  console.log(resp.LogResult);
 
   // return response
   return JSON.parse(resp.Payload);
