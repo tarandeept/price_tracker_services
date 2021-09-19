@@ -2,6 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import * as lambda from '@aws-cdk/aws-lambda';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import * as apigw from '@aws-cdk/aws-apigateway';
+import { Duration } from '@aws-cdk/core';
 
 export interface ProductServiceProps {}
 
@@ -16,13 +17,15 @@ export class ProductService extends cdk.Construct {
     const scraperHandler = new lambda.Function(this, 'ScraperHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
-      handler: 'scraper.handler'
+      handler: 'scraper.handler',
+      timeout: Duration.seconds(10),
     });
 
     const handler = new lambda.Function(this, 'GetProductHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
       handler: 'getProduct.handler',
+      timeout: Duration.seconds(10),
       environment: {
         TABLE_NAME: productsTable.tableName,
         SCRAPER_HANDLER: scraperHandler.functionName
