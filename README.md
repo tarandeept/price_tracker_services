@@ -14,6 +14,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
  * `cdk diff`        compare deployed stack with current state
  * `cdk synth`       emits the synthesized CloudFormation template
 
+## How to debug lambdas locally
+
 Running local test using SAM CLI
 Invoking a lambda
 sam-beta-cdk local invoke -e ./sam/event.json -n ./sam/env.json PriceTrackerServicesStack/GetProductHandler
@@ -22,4 +24,11 @@ Starting an api gateway local server
 sam-beta-cdk local start-api -n ./sam/env.json
 
 Invoking the scraper lambda
-sam-beta-cdk local invoke -e ./sam/event2.json PriceTrackerServicesStack/ScraperHandler
+sam-beta-cdk local invoke -e ./sam/happy_path.json PriceTrackerServicesStack/ScraperHandler
+
+
+
+## Edge cases to consider
+
+- Invalid URL
+- priceblock_ourprice id is not in the html of the URL
