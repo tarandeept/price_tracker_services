@@ -2,18 +2,33 @@ const cheerio = require('cheerio');
 const got = require('got');
 const { build_response } = require("./utils");
 
+const extract_price = (html) => {
+  var price = html('span[id=priceblock_ourprice]').html();
+  price = price.replace('$', '').replace(',', '').trim();
+  price = parseFloat(price);
+  return price;
+}
+
+const extract_title = (html) => {
+  var title = html('span[id=productTitle]').html();
+  return title.trim();
+}
+
 exports.handler = async function(event) {
   try {
     const product_url = event.product_url;
     const response = await got(product_url);
 
-    const $ = cheerio.load(response.body, null, false);
-    const price = $('span[id=priceblock_ourprice]').html();
+    const html = cheerio.load(response.body, null, false);
 
-    return build_response(200, `Here is the price ${price}`);
+    const price = extract_price(html);
+    const title = extract_title(html);
+
+    return build_response(200, `Here is the price ${price} for ${title}`);
 
   } catch(error) {
     console.log(error);
-  }
 
+    return build_response(422, 'Invalid product url');
+  }
 };
