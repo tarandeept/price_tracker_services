@@ -1,12 +1,5 @@
-const {DynamoDB, Lambda} = require('aws-sdk');
-
-const build_response = (status, body) => {
-  return {
-    statusCode: status,
-    headers: { "Content-Type": "application/json" },
-    body: body
-  }
-}
+const { DynamoDB, Lambda } = require('aws-sdk');
+const { build_response } = require("./utils");
 
 exports.handler = async function(event) {
   // console.log("request:", JSON.stringify(event, undefined, 2));
