@@ -1,6 +1,6 @@
 {
   "resource": "/products/{product_url}",
-  "path": "/products/1234",
+  "path": "/products/12345",
   "httpMethod": "GET",
   "headers": {
       "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
@@ -113,7 +113,7 @@
   "queryStringParameters": null,
   "multiValueQueryStringParameters": null,
   "pathParameters": {
-      "product_url": "1234"
+      "product_url": "12345"
   },
   "stageVariables": null,
   "requestContext": {
