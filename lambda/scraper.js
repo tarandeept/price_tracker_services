@@ -20,15 +20,11 @@ exports.handler = async function(event) {
     const response = await got(product_url);
 
     const html = cheerio.load(response.body, null, false);
-
     const price = extract_price(html);
     const title = extract_title(html);
 
     return build_response(200, `Here is the price ${price} for ${title}`);
-
   } catch(error) {
-    console.log(error);
-
     return build_response(422, 'Invalid product url');
   }
 };
