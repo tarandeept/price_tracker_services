@@ -9,6 +9,7 @@ cdk.out
 
 # SAM
 .aws-sam
+sam/env.json
 
 !lambda/*.js
 
