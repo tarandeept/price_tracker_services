@@ -25,6 +25,8 @@ exports.handler = async function(event) {
 
     return build_response(200, `Here is the price ${price} for ${title}`);
   } catch(error) {
-    return build_response(422, 'Invalid product url');
+    var body = error.stack || JSON.stringify(error, null, 2);
+    console.log(body);
+    return build_response(400, JSON.stringify(body));
   }
 };

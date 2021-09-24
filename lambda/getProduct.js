@@ -2,13 +2,11 @@ const { DynamoDB, Lambda } = require('aws-sdk');
 const { build_response } = require("./utils");
 
 exports.handler = async function(event) {
-    try {
-
+  try {
     const product_url = event.pathParameters.product_url;
     const dynamo = new DynamoDB();
     const lambda = new Lambda();
 
-    // Query DB
     var params = {
       TableName: process.env.TABLE_NAME,
       KeyConditionExpression: 'product_url = :url',
@@ -27,50 +25,41 @@ exports.handler = async function(event) {
     // Else Invoke Lambda to scrape product_url
     const resp = await lambda.invoke({
       FunctionName: process.env.SCRAPER_HANDLER,
-      Payload: JSON.stringify({'product_url': product_url}),
+      Payload: JSON.stringify({ 'product_url': product_url }),
       LogType: 'Tail'
     }).promise();
 
-    const status = resp.Payload.statusCode;
+    // console.log(resp.LogResult);
 
-    console.log("NO PROBLEMO HERE!");
+    const response = JSON.parse(resp.Payload);
 
-    console.log(resp.LogResult);
+    if (response.Payload.statusCode >= 400) {
+      throw new Error(response.Payload.body);
+    }
+
+    const { title, price } = response.Payload;
 
     // Persist into db
+    var params = {
+      TableName: process.env.TABLE_NAME,
+      Item: {
+        "product_url": { S: product_url },
+        "title": { S: title },
+        "price": { N: price }
+      }
+    };
 
-    return JSON.parse(resp.Payload);
+    console.log(params);
+
+    // await dynamo.putItem({
+    //   TableName: process.env.HITS_TABLE_NAME,
+    //   Key: { path: { S: event.path } },
+    //   UpdateExpression: 'ADD HITS :incr',
+    //   ExpressionAttributeValues: { ':incr': { N: '1' } }
+    // }).promise();
+
+    return build_response(200, 'Yessir');
   } catch(error) {
-    console.log("WE HAVE A PROBLEM!");
-    return build_response(422, 'Invalid product_url');
+    return build_response(400, error);
   }
 };
-
-
-
-// exports.handler = async function(event) {
-//   console.log("request: ", JSON.stringify(event, undefined, 2));
-
-//   // create AWS SDK clients
-//   const dynamo = new DynamoDB();
-//   const lambda = new Lambda();
-
-//   // update dynamo entry for "path" with hits++
-//   await dynamo.updateItem({
-//     TableName: process.env.HITS_TABLE_NAME,
-//     Key: { path: { S: event.path } },
-//     UpdateExpression: 'ADD HITS :incr',
-//     ExpressionAttributeValues: { ':incr': { N: '1' } }
-//   }).promise();
-
-//   // call downstream function and capture response
-//   const resp = await lambda.invoke({
-//     FunctionName: process.env.DOWNSTREAM_FUNCTION_NAME,
-//     Payload: JSON.stringify(event)
-//   }).promise();
-
-//   console.log('downstream response: ', JSON.stringify(resp, undefined, 2));
-
-//   // return response back to upstream caller
-//   return JSON.parse(resp.Payload);
-// };
