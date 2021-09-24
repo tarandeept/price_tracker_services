@@ -11,3 +11,6 @@ cdk.out
 .aws-sam
 
 !lambda/*.js
+
+# Venv
+scraper/.venv
