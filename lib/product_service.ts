@@ -15,8 +15,8 @@ export class ProductService extends cdk.Construct {
     });
 
     const scraperHandler = new lambda.Function(this, 'ScraperHandler', {
-      runtime: lambda.Runtime.PYTHON_3_8,
-      code: lambda.Code.fromAsset('scraper'),
+      runtime: lambda.Runtime.PYTHON_3_7,
+      code: lambda.Code.fromAsset('scraper/deployment-package.zip'),
       handler: 'scraper.handler',
       timeout: Duration.seconds(10),
     });

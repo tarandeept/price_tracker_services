@@ -13,5 +13,6 @@ sam/env.json
 
 !lambda/*.js
 
-# Venv
+# Scraper build
 scraper/.venv
+scraper/deployment-package.zip
