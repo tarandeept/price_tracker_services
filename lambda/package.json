@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "*",
-    "got": "^11.8.2"
+    "got": "^11.8.2",
+    "got-scraping": "^1.0.4"
   }
 }
