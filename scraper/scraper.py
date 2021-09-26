@@ -1,6 +1,6 @@
 import requests
 
-if __name__ == '__main__':
+def handler(event):
     url = 'https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref=sr_1_4?_encoding=UTF8&c=ts&dchild=1&keywords=Tennis%2BRackets&qid=1632527081&s=racquet-sports&sr=1-4&ts_id=3420071&th=1&psc=1'
     proxies = {
         "http": 'http://205.185.118.53:80'
@@ -19,3 +19,6 @@ if __name__ == '__main__':
         print(response.text)
     except Exception as e:
         print(e)
+
+if __name__ == '__main__':
+    handler('event')
