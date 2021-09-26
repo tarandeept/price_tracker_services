@@ -17,6 +17,13 @@ def handler(event, context):
     try:
         response = requests.get(url, headers=headers)
         print(response.text)
+
+        return {
+            "statusCode": 200,
+            "headers": { "Content-Type": "application/json" },
+            "body": "hello world"
+        }
+
     except Exception as e:
         print(e)
 
