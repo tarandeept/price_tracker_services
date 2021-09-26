@@ -21,4 +21,4 @@ def handler(event, context):
         print(e)
 
 if __name__ == '__main__':
-    handler('event')
+    handler('event', 'context')
