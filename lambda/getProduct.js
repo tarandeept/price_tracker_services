@@ -33,14 +33,14 @@ exports.handler = async function(event) {
 
     const response = JSON.parse(resp.Payload);
 
-    if (response.Payload.statusCode >= 400) {
-      throw new Error(response.Payload.body);
-    }
+    console.log(response);
+    console.log(response.body);
+    // console.log(response.body.title);
 
-    const { title, price } = response.Payload;
+    const { title, price } = response.body;
 
     // Persist into db
-    var params = {
+    var put_params = {
       TableName: process.env.TABLE_NAME,
       Item: {
         "product_url": { S: product_url },
@@ -49,17 +49,13 @@ exports.handler = async function(event) {
       }
     };
 
-    console.log(params);
+    console.log(put_params);
 
-    // await dynamo.putItem({
-    //   TableName: process.env.HITS_TABLE_NAME,
-    //   Key: { path: { S: event.path } },
-    //   UpdateExpression: 'ADD HITS :incr',
-    //   ExpressionAttributeValues: { ':incr': { N: '1' } }
-    // }).promise();
+    await dynamo.putItem({put_params}).promise();
 
-    return build_response(200, 'Yessir');
+    return build_response(200, put_params.Item);
   } catch(error) {
+    console.log('Err: ', error);
     return build_response(400, error);
   }
 };
