@@ -1,7 +1,6 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-import lxml
 
 def extract_title(soup):
     title = soup.find(id='productTitle').text
@@ -15,11 +14,12 @@ def extract_price(soup):
 def handler(event, context=None):
     url = event['product_url']
     proxies = {
-        "http": 'http://205.185.118.53:80'
+        "http": 'http://64.124.38.140:8080',
+        "https": 'http://64.124.38.140:8080'
     }
 
     headers = {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
         'content-type': 'application/json',
         'accept': 'text/html, */*; q=0.01',
         'accept-language': 'en-US,en;q=0.9',
@@ -27,8 +27,9 @@ def handler(event, context=None):
     }
 
     try:
-        response = requests.get(url, headers=headers)
-        soup = BeautifulSoup(response.text, 'lxml')
+        response = requests.get(url, headers=headers, proxies=proxies)
+        print(response.text)
+        soup = BeautifulSoup(response.text, 'html.parser')
 
         title = extract_title(soup)
         price = extract_price(soup)
@@ -39,9 +40,9 @@ def handler(event, context=None):
         }
 
         return {
-            'statusCode': 200,
+            'status_code': 200,
             'headers': { 'Content-Type': 'application/json' },
-            'body': json.dumps(body)
+            'body': body
         }
 
     except Exception as e:
