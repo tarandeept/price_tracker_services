@@ -16,8 +16,7 @@ const extract_title = (html) => {
 
 exports.handler = async function(event) {
   try {
-    // const product_url = event.product_url;
-    const product_url = 'https://www.amazon.com/Jura-Tumbler-Double-Stainless-Installation/dp/B07MJR3P1H/ref=sr_1_5?dchild=1&keywords=coffee+cup&qid=1632639304&sr=8-5';
+    const product_url = event.product_url;
 
     const headers = {
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
