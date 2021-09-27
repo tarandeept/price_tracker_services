@@ -18,14 +18,14 @@ export class ProductService extends cdk.Construct {
       runtime: lambda.Runtime.PYTHON_3_7,
       code: lambda.Code.fromAsset('scraper/deployment-package.zip'),
       handler: 'scraper.handler',
-      timeout: Duration.seconds(10),
+      timeout: Duration.seconds(20),
     });
 
     const handler = new lambda.Function(this, 'GetProductHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
       handler: 'getProduct.handler',
-      timeout: Duration.seconds(10),
+      timeout: Duration.seconds(20),
       environment: {
         TABLE_NAME: productsTable.tableName,
         SCRAPER_HANDLER: scraperHandler.functionName
