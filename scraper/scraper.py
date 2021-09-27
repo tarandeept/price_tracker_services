@@ -1,7 +1,19 @@
+import json
 import requests
+from bs4 import BeautifulSoup
 
-def handler(event, context):
-    url = 'https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref=sr_1_4?_encoding=UTF8&c=ts&dchild=1&keywords=Tennis%2BRackets&qid=1632527081&s=racquet-sports&sr=1-4&ts_id=3420071&th=1&psc=1'
+def extract_title(soup):
+    title = soup.find('productTitle')
+    return title.strip()
+
+def extract_price(soup):
+    price = soup.find('priceblock_ourprice')
+    price = price.text.replace('$', '').replace(',', '').strip()
+    return float(price)
+
+def handler(event, context=None):
+    event = json.loads(event)
+    url = event['product_url']
     proxies = {
         "http": 'http://205.185.118.53:80'
     }
@@ -16,16 +28,30 @@ def handler(event, context):
 
     try:
         response = requests.get(url, headers=headers)
-        print(response.text)
+        soup = BeautifulSoup(response.text, 'lxml')
+
+        title = extract_title(soup)
+        price = extract_price(soup)
+
+        body = {
+            'title': title,
+            'price': price
+        }
 
         return {
-            "statusCode": 200,
-            "headers": { "Content-Type": "application/json" },
-            "body": "hello world"
+            'statusCode': 200,
+            'headers': { 'Content-Type': 'application/json' },
+            'body': json.dumps(body)
         }
 
     except Exception as e:
-        print(e)
+        return {
+            'statusCode': 400,
+            'headers': { 'Content-Type': 'application/json' },
+            'errors': str(e)
+        }
 
 if __name__ == '__main__':
-    handler('event', 'context')
+    url = 'https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref=sr_1_4?_encoding=UTF8&c=ts&dchild=1&keywords=Tennis%2BRackets&qid=1632527081&s=racquet-sports&sr=1-4&ts_id=3420071&th=1&psc=1'
+    event = json.dumps({ 'product_url': url })
+    handler(event)
