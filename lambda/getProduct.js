@@ -19,7 +19,7 @@ exports.handler = async function(event) {
 
     // If product is there and price is present, return the product record
     if (data.Items.length === 1 && data.Items[0].price.N > 0) {
-      return build_response(200, data);
+      return build_response(200, data.Items[0]);
     }
 
     // Else Invoke Lambda to scrape product_url
