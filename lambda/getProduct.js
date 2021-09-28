@@ -3,7 +3,7 @@ const { build_response } = require("./utils");
 
 exports.handler = async function(event) {
   try {
-    const product_url = event.pathParameters.product_url;
+    const product_url = event.queryStringParameters.product_url;
     const dynamo = new DynamoDB();
     const lambda = new Lambda();
 

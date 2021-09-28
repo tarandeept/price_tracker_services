@@ -45,8 +45,14 @@ export class ProductService extends cdk.Construct {
     });
 
     const products = api.root.addResource('products');
-    const product = products.addResource('{product_url}');
-    const getProductIntegration = new apigw.LambdaIntegration(handler);
-    product.addMethod('GET', getProductIntegration);  // GET /products/{product_url}
+    const product = products.addResource('product');
+
+    const getProductIntegration = new apigw.LambdaIntegration(handler, {
+      requestParameters: {
+        'integration.request.querystring.product_url': 'method.request.querystring.product_url'
+      }
+    });
+
+    product.addMethod('GET', getProductIntegration);  // GET /products/product?product_url={product_url}
   }
 }
