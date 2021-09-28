@@ -33,10 +33,6 @@ exports.handler = async function(event) {
 
     const response = JSON.parse(resp.Payload);
 
-    console.log(response);
-    console.log(response.body);
-    // console.log(response.body.title);
-
     const { title, price } = response.body;
 
     // Persist into db
@@ -45,13 +41,11 @@ exports.handler = async function(event) {
       Item: {
         "product_url": { S: product_url },
         "title": { S: title },
-        "price": { N: price }
+        "price": { N: price.toString() }
       }
     };
 
-    console.log(put_params);
-
-    await dynamo.putItem({put_params}).promise();
+    await dynamo.putItem(put_params).promise();
 
     return build_response(200, put_params.Item);
   } catch(error) {
