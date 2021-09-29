@@ -2,6 +2,6 @@ exports.build_response = (status, body) => {
   return {
     statusCode: status,
     headers: { "Content-Type": "application/json" },
-    body: body
+    body: JSON.stringify(body)
   }
 }
