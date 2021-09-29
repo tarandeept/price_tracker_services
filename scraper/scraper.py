@@ -1,6 +1,8 @@
+import os
 import json
 import requests
 from bs4 import BeautifulSoup
+import boto3
 
 def extract_title(soup):
     title = soup.find(id='productTitle').text
@@ -28,21 +30,27 @@ def handler(event, context=None):
 
     try:
         response = requests.get(url, headers=headers, proxies=proxies)
-        print(response.text)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         title = extract_title(soup)
         price = extract_price(soup)
 
-        body = {
-            'title': title,
-            'price': price
-        }
+        dynamodb = boto3.client('dynamodb')
+
+        dynamodb.put_item(
+            # TableName=os.environ.get('TABLE_NAME'),
+            TableName=os.environ.get('TABLE_NAME'),
+            Item={
+                'product_url': { 'S': url },
+                'title': { 'S': title },
+                'price': { 'N': str(price) }
+            }
+        )
 
         return {
             'status_code': 200,
             'headers': { 'Content-Type': 'application/json' },
-            'body': body
+            'body': { 'product_url': url, 'title': title, 'price': price }
         }
 
     except Exception as e:
