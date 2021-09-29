@@ -37,6 +37,7 @@ export class ProductService extends cdk.Construct {
 
     // grant the lambda role read/write permissions to our table
     productsTable.grantReadWriteData(handler);
+    productsTable.grantReadWriteData(scraperHandler);
 
     // grant the handler permission to invoke the scraper lambda
     scraperHandler.grantInvoke(handler);
