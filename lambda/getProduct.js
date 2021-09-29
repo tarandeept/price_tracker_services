@@ -33,21 +33,7 @@ exports.handler = async function(event) {
 
     const response = JSON.parse(resp.Payload);
 
-    const { title, price } = response.body;
-
-    // Persist into db
-    var put_params = {
-      TableName: process.env.TABLE_NAME,
-      Item: {
-        "product_url": { S: product_url },
-        "title": { S: title },
-        "price": { N: price.toString() }
-      }
-    };
-
-    await dynamo.putItem(put_params).promise();
-
-    return build_response(200, put_params.Item);
+    return build_response(200, response.body);
   } catch(error) {
     console.log('Err: ', error);
     return build_response(400, error);
