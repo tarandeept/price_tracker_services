@@ -24,7 +24,7 @@ Starting an api gateway local server
 sam-beta-cdk local start-api -n ./sam/env.json
 
 Invoking the scraper lambda
-sam-beta-cdk local invoke -e ./sam/happy_path.json PriceTrackerServicesStack/ScraperHandler
+sam-beta-cdk local invoke -e ./sam/happy_path.json -n ./sam/env.json PriceTrackerServicesStack/ScraperHandler
 
 ## Build scripts
 Building the scraper lambda package

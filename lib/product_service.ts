@@ -19,6 +19,9 @@ export class ProductService extends cdk.Construct {
       code: lambda.Code.fromAsset('scraper/deployment-package.zip'),
       handler: 'scraper.handler',
       timeout: Duration.seconds(20),
+      environment: {
+        TABLE_NAME: productsTable.tableName
+      }
     });
 
     const handler = new lambda.Function(this, 'GetProductHandler', {
