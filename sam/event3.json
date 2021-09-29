@@ -1,0 +1,111 @@
+{
+  "resource": "/products/product",
+  "path": "/products/product",
+  "httpMethod": "GET",
+  "headers": {
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Accept-Language": "en-US,en;q=0.9",
+    "cache-control": "max-age=0",
+    "CloudFront-Forwarded-Proto": "https",
+    "CloudFront-Is-Desktop-Viewer": "true",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "CloudFront-Viewer-Country": "US",
+    "Host": "5ml2a5unki.execute-api.us-west-1.amazonaws.com",
+    "sec-ch-ua": "Google Chrome;v=93, Not;A Brand;v=99, Chromium;v=93",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "macOS",
+    "sec-fetch-dest": "document",
+    "sec-fetch-mode": "navigate",
+    "sec-fetch-site": "none",
+    "sec-fetch-user": "?1",
+    "upgrade-insecure-requests": "1",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+    "Via": "2.0 4d0d70ec0eabd0560d63af069388e374.cloudfront.net (CloudFront)",
+    "X-Amz-Cf-Id": "CEizCYSst3S1jTA9W0ZO1id4wbbU03RnYblw2uTWwher62Owpd87hA==",
+    "X-Amzn-Trace-Id": "Root=1-6154a951-247e4afe5cbb5e4b18f320a8",
+    "X-Forwarded-For": "73.66.97.238, 64.252.190.80",
+    "X-Forwarded-Port": "443",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept": [
+      "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+    ],
+    "Accept-Encoding": [ "gzip, deflate, br" ],
+    "Accept-Language": [ "en-US,en;q=0.9" ],
+    "cache-control": [ "max-age=0" ],
+    "CloudFront-Forwarded-Proto": [ "https" ],
+    "CloudFront-Is-Desktop-Viewer": [ "true" ],
+    "CloudFront-Is-Mobile-Viewer": [ "false" ],
+    "CloudFront-Is-SmartTV-Viewer": [ "false" ],
+    "CloudFront-Is-Tablet-Viewer": [ "false" ],
+    "CloudFront-Viewer-Country": [ "US" ],
+    "Host": [ "5ml2a5unki.execute-api.us-west-1.amazonaws.com" ],
+    "sec-ch-ua": [
+      "Google Chrome;v=93, Not;A Brand;v=99, Chromium;v=93"
+    ],
+    "sec-ch-ua-mobile": [ "?0" ],
+    "sec-ch-ua-platform": [ "macOS" ],
+    "sec-fetch-dest": [ "document" ],
+    "sec-fetch-mode": [ "navigate" ],
+    "sec-fetch-site": [ "none" ],
+    "sec-fetch-user": [ "?1" ],
+    "upgrade-insecure-requests": [ "1" ],
+    "User-Agent": [
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36"
+    ],
+    "Via": [
+      "2.0 4d0d70ec0eabd0560d63af069388e374.cloudfront.net (CloudFront)"
+    ],
+    "X-Amz-Cf-Id": [ "CEizCYSst3S1jTA9W0ZO1id4wbbU03RnYblw2uTWwher62Owpd87hA==" ],
+    "X-Amzn-Trace-Id": [ "Root=1-6154a951-247e4afe5cbb5e4b18f320a8" ],
+    "X-Forwarded-For": [ "73.66.97.238, 64.252.190.80" ],
+    "X-Forwarded-Port": [ "443" ],
+    "X-Forwarded-Proto": [ "https" ]
+  },
+  "queryStringParameters": {
+    "product_url": "https://www.amazon.com/SanDisk-Ultra-UHS-I-Memory-SDSDUNR-064G-GN6IN/dp/B07YFGGPH3/ref=sr_1_4?dchild=1&keywords=sd+chip&qid=1632892578&sr=8-4"
+  },
+  "multiValueQueryStringParameters": {
+    "product_url": [
+      "https://www.amazon.com/SanDisk-Ultra-UHS-I-Memory-SDSDUNR-064G-GN6IN/dp/B07YFGGPH3/ref=sr_1_4?dchild=1&keywords=sd+chip&qid=1632892578&sr=8-4"
+    ]
+  },
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourceId": "t3dzg4",
+    "resourcePath": "/products/product",
+    "httpMethod": "GET",
+    "extendedRequestId": "Gb9ktFmGSK4FuqQ=",
+    "requestTime": "29/Sep/2021:17:58:41 +0000",
+    "path": "/prod/products/product",
+    "accountId": "852018547902",
+    "protocol": "HTTP/1.1",
+    "stage": "prod",
+    "domainPrefix": "5ml2a5unki",
+    "requestTimeEpoch": 1632938321123,
+    "requestId": "6a94bd81-3b4d-46f7-bc9a-0008dd8ee0c4",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "sourceIp": "73.66.97.238",
+      "principalOrgId": null,
+      "accessKey": null,
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+      "user": null
+    },
+    "domainName": "5ml2a5unki.execute-api.us-west-1.amazonaws.com",
+    "apiId": "5ml2a5unki"
+  },
+  "body": null,
+  "isBase64Encoded": false
+}
