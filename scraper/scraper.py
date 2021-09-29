@@ -38,7 +38,6 @@ def handler(event, context=None):
         dynamodb = boto3.client('dynamodb')
 
         dynamodb.put_item(
-            # TableName=os.environ.get('TABLE_NAME'),
             TableName=os.environ.get('TABLE_NAME'),
             Item={
                 'product_url': { 'S': url },
