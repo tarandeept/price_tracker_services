@@ -3,6 +3,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import boto3
+from dotenv import load_dotenv
 
 def extract_title(soup):
     title = soup.find(id='productTitle').text
@@ -12,6 +13,49 @@ def extract_price(soup):
     price = soup.find(id='priceblock_ourprice').text
     price = price.replace('$', '').replace(',', '').strip()
     return float(price)
+
+def update_or_insert(url, title, new_price):
+    TableName = os.environ.get('TABLE_NAME')
+    dynamodb = boto3.client('dynamodb')
+
+    record = dynamodb.query(
+        TableName=TableName,
+        KeyConditionExpression='product_url = :url',
+        ExpressionAttributeValues={
+            ':url': { 'S': url }
+        }
+    )
+
+    if int(record['Count']) == 1:
+        curr_price = float(record['Items'][0]['price']['N'])
+        if new_price < curr_price:
+            dynamodb.update_item(
+                TableName=TableName,
+                Key={ 'product_url': { 'S': url } },
+                UpdateExpression='set price=:price',
+                ExpressionAttributeValues={
+                    ':price': { 'N': str(new_price) }
+                }
+            )
+            ### Push record into SNS
+        elif new_price > curr_price:
+            dynamodb.update_item(
+                TableName=TableName,
+                Key={ 'product_url': { 'S': url } },
+                UpdateExpression='set price=:price',
+                ExpressionAttributeValues={
+                    ':price': { 'N': str(new_price) }
+                }
+            )
+    else:
+        dynamodb.put_item(
+            TableName=TableName,
+            Item={
+                'product_url': { 'S': url },
+                'title': { 'S': title },
+                'price': { 'N': str(new_price) }
+            }
+        )
 
 def handler(event, context=None):
     url = event['product_url']
@@ -35,16 +79,7 @@ def handler(event, context=None):
         title = extract_title(soup)
         price = extract_price(soup)
 
-        dynamodb = boto3.client('dynamodb')
-
-        dynamodb.put_item(
-            TableName=os.environ.get('TABLE_NAME'),
-            Item={
-                'product_url': { 'S': url },
-                'title': { 'S': title },
-                'price': { 'N': str(price) }
-            }
-        )
+        update_or_insert(url, title, price)
 
         return {
             'status_code': 200,
@@ -60,6 +95,9 @@ def handler(event, context=None):
         }
 
 if __name__ == '__main__':
+    load_dotenv()
+    os.environ['TABLE_NAME'] = os.getenv('TABLE_NAME')
+
     url = 'https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref=sr_1_4?_encoding=UTF8&c=ts&dchild=1&keywords=Tennis%2BRackets&qid=1632527081&s=racquet-sports&sr=1-4&ts_id=3420071&th=1&psc=1'
     event = { 'product_url': url }
     response = handler(event)

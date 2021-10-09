@@ -16,3 +16,5 @@ sam/env.json
 # Scraper build
 scraper/.venv
 scraper/deployment-package.zip
+
+.env
