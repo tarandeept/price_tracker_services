@@ -3,6 +3,7 @@ import * as subs from '@aws-cdk/aws-sns-subscriptions';
 import * as sqs from '@aws-cdk/aws-sqs';
 import * as cdk from '@aws-cdk/core';
 import { ProductService } from './product_service';
+import { EmailService } from './email_service';
 
 export class PriceTrackerServicesStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -10,12 +11,8 @@ export class PriceTrackerServicesStack extends cdk.Stack {
 
     const productService = new ProductService(this, 'ProductService', {});
 
-    // const queue = new sqs.Queue(this, 'PriceTrackerServicesQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-
-    // const topic = new sns.Topic(this, 'PriceTrackerServicesTopic');
-
-    // topic.addSubscription(new subs.SqsSubscription(queue));
+    const emailService = new EmailService(this, 'EmailService', {
+      topic: productService.topic,
+    });
   }
 }
