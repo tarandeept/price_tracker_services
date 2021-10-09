@@ -42,7 +42,7 @@ def get_html(url):
     response = requests.get(url, headers=headers, proxies=proxy)
     return response
 
-def get_random_proxy() -> {}:
+def get_random_proxy():
     return {
         "http": 'http://64.124.38.140:8080',
         "https": 'http://64.124.38.140:8080'
@@ -129,7 +129,7 @@ def debug():
     sqs = boto3.client('sqs', region_name = 'us-west-1')
 
     messages = sqs.receive_message(
-        QueueUrl=queue_url,
+        QueueUrl=QueueUrl,
         MaxNumberOfMessages=10
     )
     body = json.loads(messages['Messages'][0]['Body'])
