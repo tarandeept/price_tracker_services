@@ -1,0 +1,38 @@
+{
+  "Records": [
+    {
+      "messageId": "c6e75698-2a9d-4af7-87d6-9129a2c9a528",
+      "receiptHandle": "AQEBE8NA+X4jicq0YtUasRW4oW8/jbBSZ8k9gH2i+n3ugjn4TUxohFXTEyoAEOTuNxCyRupVxWIF0i+pnZlH/4bUctsLJzeTBoCwxj7bKr8Fh4/XYb9HIXW5drZGIWdBmfr5tAO7rVELOvFk+lSxYkrVVWunk6OKTml+5vIwnHfxKzkRo9mlM9qkb+NCZwUI/e26gGTb/au/Izn7e/c1gcIq6BxuV4CpsZ0+OpqLhIcvZD10RUQVTx3FzmgSbfRcfKBIR8aK3MLeWleh7tKgzW19MWO9DSC0jbqVJ+2OPhB2fhGqwjYZI68TZBicyTF8Pka9fF4MKjmLJ5SELW8p1ErbkGyMQRi5cGl+VkQbf9yUfEm/QsffeKPoViCeBTLCMw5c7kB7YlmsuOSmGdzDxC4uaLl8E4JacEVI3cutTFww9hPIFPA6EIQUYyMpLATqIoqD6XXhmyIVltTC0Y16UHy1VvRz3xGeMXm828Ya516Selc=",
+      "body": "{\n  \"Type\" : \"Notification\",\n  \"MessageId\" : \"7cd64ee8-ebb3-50e0-8c0a-17358ad165f5\",\n  \"TopicArn\" : \"arn:aws:sns:us-west-1:852018547902:PriceTrackerServicesStack-ProductServiceProductTopic54FC1135-8S4TZR39Y1O5\",\n  \"Message\" : \"{\\\"product_url\\\": \\\"https://www.amazon.com/Spalding-Zi-Indoor-Outdoor-Basketball-29-5/dp/B08QJH7TSW/ref=sr_1_3?crid=3FWIJGG616KAX\\\", \\\"price\\\": 34.99, \\\"title\\\": \\\"Spalding Zi/O Indoor-Outdoor Basketball\\\"}\",\n  \"Timestamp\" : \"2021-10-10T21:46:10.137Z\",\n  \"SignatureVersion\" : \"1\",\n  \"Signature\" : \"Gixx66Pia+Z33UzWdTKZslQZL8m7VSIHUxqPDOoGTigDYA9znDorCKa9ueisfq1oQF/xc+AqOM+tRspX0lGLTYV05qazx7RE+xaWiunF6qWviInEz6lvHlpHyjXXsL7QMMZn0DzpKfcQbTXhDbJMcrcxmUOWYzXaBydnXwucegPCHFCxJnqMtdDOPEEjF993uzUc9CYh42f8xdnecMhkYSZioNw5HhVbhIXji+sHt/i4xhLnI4lWGENWpbbsLWC1MHsmCbmw5p26nJJRasyCDYgH9o5kDYHnyXIQscvvzf/5jTZ+ND5UWMOrt/fimSscjjDJYJS+uJG2/XUR0uUinQ==\",\n  \"SigningCertURL\" : \"https://sns.us-west-1.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem\",\n  \"UnsubscribeURL\" : \"https://sns.us-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-1:852018547902:PriceTrackerServicesStack-ProductServiceProductTopic54FC1135-8S4TZR39Y1O5:5ea9db61-edcd-4b14-a988-bf3355ec5b49\"\n}",
+      "attributes": {
+          "ApproximateReceiveCount": "1",
+          "SentTimestamp": "1633902370184",
+          "SenderId": "AIDAJKV7U6VPUEF2G77MA",
+          "ApproximateFirstReceiveTimestamp": "1633902370195"
+      },
+      "messageAttributes": {},
+      "md5OfMessageAttributes": null,
+      "md5OfBody": "100bf111bd7d94bae4852bd10b0f973c",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-1:852018547902:PriceTrackerServicesStack-EmailServiceEmailServiceQueue1457AD7E-1H8YLQVHRS48P",
+      "awsRegion": "us-west-1"
+    },
+    {
+      "messageId": "27b863a9-fc8a-4914-8b61-bdc4749345cb",
+      "receiptHandle": "AQEB3RkjCB4a3C2Jn3PnAaubgDI0Y+IKg0D4P+hZ3UKbYJobOLnrO7/SyRARI0nyUjXsHuU0TAZ1oxOEzujUcXCm6yvn+SRicHxwCpnkVEO4Zb5j4SN/niZExvVBXgTuV+dIH/W9OxP7Hp5kNtPT22xA129sbbQkjRd018o9nKhx73jVCbff3M+SKhNBSJNWtsddPcSvGDXaVFfjgGxl9KaeAWTQXvlfcQEXN04ZfOTGTNcZuBKK5nRayyMMtzW3WR1SKgOMq3vGsSi4TTzu+Ny7NWc+LpNMARZrDoDmUGFW0WldPwbZH+zFgXUygirb/VhW3ny6MEtzD0eYv4Uv7NrE51nAvxYScsLsw2hIdo3ht5eTYLwPhVjo3r16oOcLjLPHkCn4+tMnFu41Lkv1XmM2rwMe2+nWuHhKQQwtyeUv73DVGcKUcydH0WCGceTH3KXsvB3mlvWWB+2f3i+RXNL+1FkZJYpgkSjDUD38bPnBDGM=",
+      "body": "{\n  \"Type\" : \"Notification\",\n  \"MessageId\" : \"9eb6b50e-f62c-5ef6-8a40-ecd397400c08\",\n  \"TopicArn\" : \"arn:aws:sns:us-west-1:852018547902:PriceTrackerServicesStack-ProductServiceProductTopic54FC1135-8S4TZR39Y1O5\",\n  \"Message\" : \"{\\\"product_url\\\": \\\"https://www.amazon.com/Wilson-WRT30400U3-Federer-Tennis-Racquet/dp/B01AWLHRSO/ref=sr_1_4?_encoding=UTF8&c=ts&dchild=1&keywords=Tennis%2BRackets&qid=1632527081&s=racquet-sports&sr=1-4&ts_id=3420071&th=1&psc=1\\\", \\\"price\\\": 26.92, \\\"title\\\": \\\"Wilson Adult Recreational Tennis Racket - Size 4 1/8\\\\u201d, 4 1/4\\\\\\\", 4 3/8\\\\\\\", 4 1/2\\\\\\\\\\\"}\",\n  \"Timestamp\" : \"2021-10-10T21:46:20.040Z\",\n  \"SignatureVersion\" : \"1\",\n  \"Signature\" : \"DYxRtuhrxK5ifFRb6k1xsf2r3fnCQqV/4NzrS8viOwf3gZBwi8OBzloX0L28RCoBiNA95a276MQls/a3t2ZrlzVUTTvuj5EEKPyoetKCVm5VIJBvlAuBRMm0zAefnzROTrl6R0ilZSuOC1zMbX6+RFuYtrSYemKKm2g2CF8ySjR0sairdLFYZD2PPNgispyTLI7FNEMI0rMpGMncMWvEyDWaiT2r5Tp0NmhfEthINX93+2SkqzX3xsDEzICJStfM8cMqANB0JadJXRG5e/MmBSQGa5+dzI4R69MjbR9SWlwf+h1CX+4Pj5l2LL6mqVljCY9NyGGwj/TTM+9KX7Bc+Q==\",\n  \"SigningCertURL\" : \"https://sns.us-west-1.amazonaws.com/SimpleNotificationService-7ff5318490ec183fbaddaa2a969abfda.pem\",\n  \"UnsubscribeURL\" : \"https://sns.us-west-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-1:852018547902:PriceTrackerServicesStack-ProductServiceProductTopic54FC1135-8S4TZR39Y1O5:5ea9db61-edcd-4b14-a988-bf3355ec5b49\"\n}",
+      "attributes": {
+          "ApproximateReceiveCount": "1",
+          "SentTimestamp": "1633902380081",
+          "SenderId": "AIDAJKV7U6VPUEF2G77MA",
+          "ApproximateFirstReceiveTimestamp": "1633902380083"
+      },
+      "messageAttributes": {},
+      "md5OfMessageAttributes": null,
+      "md5OfBody": "52fb2dac95971f3819c9e801e0a696dd",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-1:852018547902:PriceTrackerServicesStack-EmailServiceEmailServiceQueue1457AD7E-1H8YLQVHRS48P",
+      "awsRegion": "us-west-1"
+    }
+  ]
+}
