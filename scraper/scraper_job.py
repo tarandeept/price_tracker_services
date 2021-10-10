@@ -23,8 +23,6 @@ def handler(event, context=None):
         for product in products:
             url = product['product_url']['S']
             invoke_scraper_async(url)
-            # pick random proxy
-            # invoke the scraper
 
         return {
             'status_code': 200,
@@ -50,7 +48,8 @@ def invoke_scraper_async(product_url):
 
     _lambda.invoke(
         FunctionName=os.environ['SCRAPER_HANDLER'],
-        Payload=json.dumps({ 'product_url': product_url })
+        InvocationType='Event',
+        Payload=json.dumps({ 'product_url': product_url }),
     )
 
 if __name__ == '__main__':

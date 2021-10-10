@@ -23,7 +23,7 @@ def handler(event, context=None):
         }
 
     except Exception as e:
-        print(e)
+        print('ERROR: ', e)
         return {
             'statusCode': 400,
             'headers': { 'Content-Type': 'application/json' },
@@ -63,11 +63,14 @@ def update_or_insert(url, title, new_price):
     if int(record['Count']) == 1:
         curr_price = float(record['Items'][0]['price']['N'])
         if new_price < curr_price:
+            print(f'Updating price of {title} to {new_price} and pushing into SNS')
             update_record(url, new_price)
             publish_to_sns(url, title, new_price)
         elif new_price > curr_price:
+            print(f'Updating price of {title} to {new_price}')
             update_record(url, new_price)
     else:
+        print(f'Insert {title} with price {new_price}')
         insert_record(url, title, new_price)
 
 def query_for_product(url):
