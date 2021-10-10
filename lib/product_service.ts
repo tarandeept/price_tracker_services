@@ -26,7 +26,8 @@ export class ProductService extends cdk.Construct {
       handler: 'scraper.handler',
       timeout: Duration.seconds(20),
       environment: {
-        TABLE_NAME: productsTable.tableName
+        TABLE_NAME: productsTable.tableName,
+        TOPIC_ARN: this.topic.topicArn
       }
     });
 
@@ -48,8 +49,7 @@ export class ProductService extends cdk.Construct {
       timeout: Duration.seconds(20),
       environment: {
         TABLE_NAME: productsTable.tableName,
-        SCRAPER_HANDLER: scraperHandler.functionName,
-        TOPIC_ARN: this.topic.topicArn
+        SCRAPER_HANDLER: scraperHandler.functionName
       }
     });
 
