@@ -30,7 +30,7 @@ export class EmailService extends cdk.Construct {
 
     // Invokes email lambda whenever SQS queue gets a new message
     emailLambda.addEventSource(new SqsEventSource(queue, {
-      batchSize: 1,
+      batchSize: 10,
       maxBatchingWindow: Duration.minutes(5),
     }));
   }
