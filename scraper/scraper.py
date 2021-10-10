@@ -115,9 +115,10 @@ def publish_to_sns(url, title, new_price):
     TopicArn = os.environ['TOPIC_ARN']
     sns = boto3.client('sns')
 
+    message = json.dumps({ 'product_url': url, 'price': str(new_price), 'title': title })
     sns.publish(
         TopicArn=TopicArn,
-        Message=json.dumps({ 'product_url': url, 'price': new_price, 'title': title })
+        Message=message
     )
 
 def debug():
