@@ -30,6 +30,17 @@ export class ProductService extends cdk.Construct {
       }
     });
 
+    const scraperJob = new lambda.Function(this, 'ScraperJob', {
+      runtime: lambda.Runtime.PYTHON_3_7,
+      code: lambda.Code.fromAsset('scraper/deployment-package.zip'),
+      handler: 'scraper_job.handler',
+      timeout: Duration.seconds(20),
+      environment: {
+        TABLE_NAME: productsTable.tableName,
+        SCRAPER_HANDLER: scraperHandler.functionName
+      }
+    });
+
     const handler = new lambda.Function(this, 'GetProductHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
@@ -44,9 +55,11 @@ export class ProductService extends cdk.Construct {
     // grant the lambda role read/write permissions to our table
     productsTable.grantReadWriteData(handler);
     productsTable.grantReadWriteData(scraperHandler);
+    productsTable.grantReadWriteData(scraperJob);
 
     // grant the handler permission to invoke the scraper lambda
     scraperHandler.grantInvoke(handler);
+    scraperHandler.grantInvoke(scraperJob);
 
     // grant the scraper permission to publish to sns topic
     this.topic.grantPublish(scraperHandler)

@@ -1,6 +1,7 @@
 import os
 import json
 import boto3
+from dotenv import load_dotenv
 
 def handler(event, context=None):
     proxies = {
@@ -17,30 +18,43 @@ def handler(event, context=None):
     }
 
     try:
-        dynamodb = boto3.client('dynamodb')
-        # TableName = os.environ.get('TABLE_NAME')
-        TableName = 'PriceTrackerServicesStack-ProductServiceProductsD9CDFA32-NG2N623JDODP'
+        products = get_products()
 
-        records = dynamodb.scan(TableName=TableName)
-
-        for rec in records['Items']:
-            print(rec)
-            print()
-
-
+        for product in products:
+            url = product['product_url']['S']
+            invoke_scraper_async(url)
+            # pick random proxy
+            # invoke the scraper
 
         return {
             'status_code': 200,
             'headers': { 'Content-Type': 'application/json' },
-            'body': { 'products_scraper': 1 }
+            'body': { 'products_scraped': len(products) }
         }
 
     except Exception as e:
+        print(e)
         return {
             'statusCode': 400,
             'headers': { 'Content-Type': 'application/json' },
-            'errors': str(e)
+            'errors': 'Error occured in scraper job'
         }
 
+def get_products():
+    dynamodb = boto3.client('dynamodb')
+    TableName = os.environ.get('TABLE_NAME')
+    return dynamodb.scan(TableName=TableName)['Items']
+
+def invoke_scraper_async(product_url):
+    _lambda = boto3.client('lambda')
+
+    _lambda.invoke(
+        FunctionName=os.environ['SCRAPER_HANDLER'],
+        Payload=json.dumps({ 'product_url': product_url })
+    )
+
 if __name__ == '__main__':
+    load_dotenv()
+    os.environ['TABLE_NAME'] = os.getenv('TABLE_NAME')
+    os.environ['SCRAPER_HANDLER'] = os.getenv('SCRAPER_HANDLER')
     handler('event')
