@@ -26,6 +26,9 @@ sam-beta-cdk local start-api -n ./sam/env.json
 Invoking the scraper lambda
 sam-beta-cdk local invoke -e ./sam/happy_path.json -n ./sam/env.json PriceTrackerServicesStack/ScraperHandler
 
+Invoking the email sender lambda
+sam-beta-cdk local invoke -e ./sam/sqs_event.json -n ./sam/env.json PriceTrackerServicesStack/EmailHandler
+
 ## Build scripts
 Building the scraper lambda package
 cd scraper
