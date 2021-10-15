@@ -30,7 +30,8 @@ Invoking the email sender lambda
 sam-beta-cdk local invoke -e ./sam/sqs_event.json -n ./sam/env.json PriceTrackerServicesStack/EmailHandler
 
 Invoking the subscribe lambda
-sam-beta-cdk local invoke -e ./sam/subscribe.json -n ./sam/api_env.json PriceTrackerServicesStack/ApiService
+sam-beta-cdk local invoke -e ./sam/subscribe.json -n ./sam/api_env.json PriceTrackerServicesStack/SubscribeHandler
+
 
 ## Build scripts
 Building the scraper lambda package
