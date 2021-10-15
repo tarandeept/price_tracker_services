@@ -27,7 +27,7 @@ export class ApiService extends cdk.Construct {
     const unsubscribeHandler = new lambda.Function(this, 'UnsubscribeHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
-      handler: 'unsubscribeHandler.handler',
+      handler: 'unsubscribe.handler',
       timeout: Duration.seconds(20),
       environment: {
         TABLE_NAME: subscriptionsTable.tableName
