@@ -29,13 +29,10 @@ sam-beta-cdk local invoke -e ./sam/happy_path.json -n ./sam/env.json PriceTracke
 Invoking the email sender lambda
 sam-beta-cdk local invoke -e ./sam/sqs_event.json -n ./sam/env.json PriceTrackerServicesStack/EmailHandler
 
+Invoking the subscribe lambda
+sam-beta-cdk local invoke -e ./sam/subscribe.json -n ./sam/api_env.json PriceTrackerServicesStack/ApiService
+
 ## Build scripts
 Building the scraper lambda package
 cd scraper
 sh build.sh
-
-
-## Edge cases to consider
-
-- Invalid URL
-- priceblock_ourprice id is not in the html of the URL

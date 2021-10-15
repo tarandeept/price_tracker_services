@@ -1,0 +1,121 @@
+{
+  "resource": "/subscribe",
+  "path": "/subscribe",
+  "httpMethod": "POST",
+  "headers": {
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cache-Control": "no-cache",
+      "CloudFront-Forwarded-Proto": "https",
+      "CloudFront-Is-Desktop-Viewer": "true",
+      "CloudFront-Is-Mobile-Viewer": "false",
+      "CloudFront-Is-SmartTV-Viewer": "false",
+      "CloudFront-Is-Tablet-Viewer": "false",
+      "CloudFront-Viewer-Country": "US",
+      "Content-Type": "application/json",
+      "Host": "gio7h9tavi.execute-api.us-west-1.amazonaws.com",
+      "Postman-Token": "554b7a39-1b32-4c58-95fa-01e8c9b9721d",
+      "User-Agent": "PostmanRuntime/7.28.4",
+      "Via": "1.1 fab4d1785391ca36e07af7bad114dd9c.cloudfront.net (CloudFront)",
+      "X-Amz-Cf-Id": "Z9jKEjTPCIxPN6HO6CVRNERVBQ6Zz0dalmei7A_3HSZz5ezYhyJdRw==",
+      "X-Amzn-Trace-Id": "Root=1-616907df-33b8f44031a54469432da102",
+      "X-Forwarded-For": "73.66.97.238, 130.176.48.150",
+      "X-Forwarded-Port": "443",
+      "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+      "Accept": [
+          "*/*"
+      ],
+      "Accept-Encoding": [
+          "gzip, deflate, br"
+      ],
+      "Cache-Control": [
+          "no-cache"
+      ],
+      "CloudFront-Forwarded-Proto": [
+          "https"
+      ],
+      "CloudFront-Is-Desktop-Viewer": [
+          "true"
+      ],
+      "CloudFront-Is-Mobile-Viewer": [
+          "false"
+      ],
+      "CloudFront-Is-SmartTV-Viewer": [
+          "false"
+      ],
+      "CloudFront-Is-Tablet-Viewer": [
+          "false"
+      ],
+      "CloudFront-Viewer-Country": [
+          "US"
+      ],
+      "Content-Type": [
+          "application/json"
+      ],
+      "Host": [
+          "gio7h9tavi.execute-api.us-west-1.amazonaws.com"
+      ],
+      "Postman-Token": [
+          "554b7a39-1b32-4c58-95fa-01e8c9b9721d"
+      ],
+      "User-Agent": [
+          "PostmanRuntime/7.28.4"
+      ],
+      "Via": [
+          "1.1 fab4d1785391ca36e07af7bad114dd9c.cloudfront.net (CloudFront)"
+      ],
+      "X-Amz-Cf-Id": [
+          "Z9jKEjTPCIxPN6HO6CVRNERVBQ6Zz0dalmei7A_3HSZz5ezYhyJdRw=="
+      ],
+      "X-Amzn-Trace-Id": [
+          "Root=1-616907df-33b8f44031a54469432da102"
+      ],
+      "X-Forwarded-For": [
+          "73.66.97.238, 130.176.48.150"
+      ],
+      "X-Forwarded-Port": [
+          "443"
+      ],
+      "X-Forwarded-Proto": [
+          "https"
+      ]
+  },
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+      "resourceId": "enet3q",
+      "resourcePath": "/subscribe",
+      "httpMethod": "POST",
+      "extendedRequestId": "HO4q8HItyK4Foww=",
+      "requestTime": "15/Oct/2021:04:47:27 +0000",
+      "path": "/prod/subscribe",
+      "accountId": "852018547902",
+      "protocol": "HTTP/1.1",
+      "stage": "prod",
+      "domainPrefix": "gio7h9tavi",
+      "requestTimeEpoch": 1634273247484,
+      "requestId": "eae0b68f-eecc-49a1-805a-1094e8fb7c68",
+      "identity": {
+          "cognitoIdentityPoolId": null,
+          "accountId": null,
+          "cognitoIdentityId": null,
+          "caller": null,
+          "sourceIp": "73.66.97.238",
+          "principalOrgId": null,
+          "accessKey": null,
+          "cognitoAuthenticationType": null,
+          "cognitoAuthenticationProvider": null,
+          "userArn": null,
+          "userAgent": "PostmanRuntime/7.28.4",
+          "user": null
+      },
+      "domainName": "gio7h9tavi.execute-api.us-west-1.amazonaws.com",
+      "apiId": "gio7h9tavi"
+  },
+  "body": "{\n    \"product_url\": \"https://www.amazon.com/tennis_ball\",\n    \"email\": \"hello@world.com\",\n    \"target_price\": 12.99\n}",
+  "isBase64Encoded": false
+}

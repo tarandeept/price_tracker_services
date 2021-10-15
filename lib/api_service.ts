@@ -65,6 +65,6 @@ export class ApiService extends cdk.Construct {
 
     subscribe.addMethod('POST', subscribeIntegration);  // POST /subscribe
     unsubscribe.addMethod('POST', unsubscribeIntegration);  // POST /unsubscribe
-    getSubs.addMethod('GET', getSubsIntegration);  // GET /subscribers
+    getSubs.addMethod('GET', getSubsIntegration);  // GET /subscribers?product_url={product_url}
   }
 }
