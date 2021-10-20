@@ -22,11 +22,7 @@ const is_subscribed = async (product_url, email) => {
 }
 
 const subscribe_user = async (product_url, email, target_price) => {
-  subscribed = await is_subscribed(product_url, email);
-
-  if (!subscribed) {
-    const id = randomUUID();
-  }
+  const id = randomUUID();
 }
 
 exports.handler = async function(event) {
@@ -36,7 +32,10 @@ exports.handler = async function(event) {
     const body = JSON.parse(event.body);
     const { product_url, email, target_price } = body;
 
-    await subscribe_user(product_url, email, target_price);
+    const subscribed = await is_subscribed(product_url, email);
+    if (!subscribed) {
+      await subscribe_user(product_url, email, target_price);
+    }
 
     return build_response(200, 'Successfully subscribed user to product');
   } catch(error) {
