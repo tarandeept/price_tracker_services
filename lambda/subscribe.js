@@ -22,7 +22,20 @@ const is_subscribed = async (product_url, email) => {
 }
 
 const subscribe_user = async (product_url, email, target_price) => {
+  const dynamo = new DynamoDB();
   const id = randomUUID();
+
+  var params = {
+    TableName: process.env.TABLE_NAME,
+    Item: {
+      'id': { S: id },
+      'email': { S: email },
+      'product_url': { S: product_url },
+      'target_price': { N: target_price.toString() }
+    }
+  }
+
+  await dynamo.putItem(params).promise();
 }
 
 exports.handler = async function(event) {
