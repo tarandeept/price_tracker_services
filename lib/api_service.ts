@@ -19,6 +19,11 @@ export class ApiService extends cdk.Construct {
       partitionKey: {name: 'email', type: dynamodb.AttributeType.STRING}
     });
 
+    subscriptionsTable.addGlobalSecondaryIndex({
+      indexName: 'productUrlIndex',
+      partitionKey: {name: 'product_url', type: dynamodb.AttributeType.STRING}
+    });
+
     const subscribeHandler = new lambda.Function(this, 'SubscribeHandler', {
       runtime: lambda.Runtime.NODEJS_14_X,
       code: lambda.Code.fromAsset('lambda'),
